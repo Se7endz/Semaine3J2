@@ -15,38 +15,24 @@ require_relative 'lib/player'
 #
 
 def game_creation_joueurs
-    puts " > Bienvenue dans Virtual Fighter XVI, THP mode.
-    Entrez les noms des deux combattants: "
+    puts "------------------------------------------------"
+    puts " > Bienvenue dans Virtual Fighter XVII, THP mode."
+    puts "------------------------------------------------"
     print " \n>"
-    @name1 = gets.chomp.to_s
+    puts "Entrez un nom"
+    @name = gets.chomp.to_s
     print " \n>"
-    @name2 = gets.chomp.to_s
 
-    @player1 = Player.new("#{@name1}")
-    @player2 = Player.new("#{@name2}")
+    @hplayer = HumanPlayer.new("#{@name}")
+    @player1 = Player.new("Jose")
+    @player2 = Player.new("Josiane")
 end
 
 #
 ##
 ### Fin JEU / CREATION / JOUEURS
 
-### Debut JEU / INTRO
-##
-#
 
-def game_intro
-    puts "\n\nLes deux combattants vont à présent entrer dans l'aire de combat !!\n
-    Ladies and Gentlemen !!! \n\nA ma droite, invaincu avec plus de 32 combats à son actif. Venu tout droit de la jungle profonde ...... #{@name1} !!!
-Dit, Le Vautour des Antilles !!"
-    
-
-puts " \n\nA ma gauche, tout droit venu des profondeurs de l'océan de la désolation lunaire sur terre : Bobigny!!! \nMortal Combat THP mode vous présente :
-\n#{@name2.upcase} Le Batracien Radioactif !!!!\n"
-end
-
-#
-##
-### Fin JEU / INTRO
 
 ### Debut JEU / LANCEMENT / COMBAT
 ##
@@ -63,12 +49,20 @@ end
 ##
 ### Fin JEU / LANCEMENT / COMBAT
 
-### Debut JEU / COMBAT
+### Debut JEU / FIGHT
 ##
 #
 
 def game_combat
     
+    while @name.life_point >0 && (player1.life_point > 0 || player2.life_point >0)
+        puts "\n\n Voici l'etat de nos joueurs"
+        puts "#{@hplayer1.show_stats}"
+        puts "#{@player1.show_stats}"
+        puts "#{@player2.show_stats}"
+  
+    end
+
     while @player1.life_point > 0 && @player2.life_point > 0
 
         puts "\n\n C'est au tour de #{@name1} d'attaquer !!\n"
