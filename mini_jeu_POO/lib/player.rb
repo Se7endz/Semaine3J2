@@ -62,19 +62,21 @@ class HumanPlayer < Player
 
 	def search_weapon
 		@style_weapon = rand(1..6)
+		@style_weapon2 = rand(1..6)
 		puts "Tu as degoté une arme de niveau : #{@style_weapon}"
-		puts "Veux tu garder cette arme ? "
-		yesno 
-	end
-	def yesno(prompt = 'Continue?', default = true)
-		  @a = ''
-		  @s = default ? '[Y/n]' : '[y/N]'
-		  @d = default ? 'y' : 'n'
-		  until %w[y n].include? a
-		    @a = ask("#{prompt} #{s} ") { |q| q.limit = 1; q.case = :downcase }
-		    @a = d if a.length == 0
-		  end
-		  @a == 'y'
-    end
+		puts "Tu peux en avoir une meilleur si tu veux.. "
+		puts "Allez on retente sa chance"
+		puts "TADAAAAAAAAA"
+		puts "Une arme de niveau #{@style_weapon2} vient de sortir !!!"
+		puts "laquelle veux tu?"
+		puts "Tape 1 ou 2 "
+		@choise = gets.chomp.to_i
+			if @choise == 1
+				return "Ca marche, tu gardes une arme de niveau : #{@style_weapon}"
+			else @choise == 2
+				return "A ta convenance!!... Tu as récuperer une arme de niveau #{@style_weapon2}"
+			end
+			end
+
 end
 binding.pry
