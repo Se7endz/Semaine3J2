@@ -23,7 +23,7 @@ def game_creation_joueurs
     @name = gets.chomp.to_s
     print " \n>"
 
-    @hplayer = HumanPlayer.new("#{@name}")
+    @hplayer1 = HumanPlayer.new("#{@name}")
     @player1 = Player.new("Jose")
     @player2 = Player.new("Josiane")
 end
@@ -40,7 +40,7 @@ end
 
 def game_lancement_combat
     puts "\n Voici l'état des joueurs :\n\n "
-    puts "#{@player1.show_stats}\n#{@player2.show_stats}"
+    puts "#{@hplayer1.show_stats}\n#{@player1.show_stats}\n#{@player2.show_stats}"
     puts "\n\n Press Enter pour démarrer le combat !!"
     gets.chomp
 end
@@ -55,34 +55,28 @@ end
 
 def game_combat
     
-    while @name.life_point >0 && (player1.life_point > 0 || player2.life_point >0)
+    while @hplayer1.life_point >0 && (@player1.life_point > 0 || @player2.life_point >0)
+        puts "\n\n C'est au tour de #{@name} d'attaquer !!\n"
+        @hplayer1.attacks(@player1)
         puts "\n\n Voici l'etat de nos joueurs"
         puts "#{@hplayer1.show_stats}"
         puts "#{@player1.show_stats}"
         puts "#{@player2.show_stats}"
-  
-    end
-
-    while @player1.life_point > 0 && @player2.life_point > 0
-
-        puts "\n\n C'est au tour de #{@name1} d'attaquer !!\n"
-        @player1.attacks(@player2)
+        break if @hplayer1.life_point <= 0 || (@player1.life_point <= 0 || @player2.life_point <= 0)
+        puts "\n\n C'est au tour de #{@name} d'attaquer !!\n"
+        @hplayer1.attacks(@player1)
         puts "\n\n Voici l'etat de nos joueurs"
-        puts "#{@player1.show_stats}"
-        puts "#{@player2.show_stats}"
-        break if @player1.life_point <= 0 || @player2.life_point <= 0
-        puts "\n\n C'est au tour de #{@name2} d'attaquer !!\n"
-        @player2.attacks(@player1)
-        puts "\n\n Voici l'etat de nos joueurs"
+        puts "#{@hplayer1.show_stats}"
         puts "#{@player1.show_stats}"
         puts "#{@player2.show_stats}"
     end
 
     
-    if @player1.life_point <= 0
-        puts "\n\n GAME OVER !!!\n\n Victoire écrasante de #{@name2} !!!!\n Il a pulvérisé #{@name1}"
-    else
-        puts "\n\n GAME OVER !!!\n\n Victoire écrasante de #{@name1} !!!!\n Il a EXPLOSE #{@name2}"
+    if @player1.life_point <= 0 || @player2.life_point <= 0
+        puts "\n\n GAME OVER !!!\n\n Victoire écrasante de #{@name} !!!!\n Il a EXPLOSE #{@player1.name} et #{@player2.name} !!!!"
+
+    elsif @hplayer1.life_point <= 0
+        puts "\n\n GAME OVER !!!\n\n Victoire écrasante de #{@player1} et #{@player2} !!!!\n Ils ont pulvérisés #{@name}"
         
     end
     puts "\n\n Press Enter pour sortir"
@@ -99,7 +93,6 @@ end
 
 def perform
     game_creation_joueurs
-    game_intro
     game_lancement_combat
     game_combat
 
