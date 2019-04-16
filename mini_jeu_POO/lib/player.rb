@@ -72,11 +72,28 @@ class HumanPlayer < Player
 		puts "Tape 1 ou 2 "
 		@choise = gets.chomp.to_i
 			if @choise == 1
-				return "Ca marche, tu gardes une arme de niveau : #{@style_weapon}"
-			else @choise == 2
-				return "A ta convenance!!... Tu as récuperer une arme de niveau #{@style_weapon2}"
+				@weapon_level = @style_weapon
+				return "Ca marche, tu gardes une arme de niveau : #{@weapon_level}"
+			elsif @choise == 2
+				@weapon_level = @style_weapon2
+				return "A ta convenance!!... Tu as récuperer une arme de niveau #{@weapon_level}"
+			elsif @choise != 1 && @choise != 2
+				return "Valeur incorrect, on a dit 1 ou 2 oueshh!!"
 			end
+			
 			end
 
+	def search_health_pack
+		@health_pack = rand(1..6)
+		if @health_pack == 0
+			return "Tu n'as rien eu, pas de bol!!!"
+		elsif  @health_pack >= 2 && @health_pack <= 5
+			@life_point = @life_point + 50
+			return "Great!!, Tu obtiens 50 pv supplementaire, tu as maintenant #{@life_point} pv."
+		elsif @health_pack == 6
+			@life_point = @life_point + 100
+			return "Alors la mon gars, va jouer au loto. Tu gagnes 100 pv!!! Tu as maintenant #{@life_point} pv."
+		end
+	end
 end
 binding.pry
